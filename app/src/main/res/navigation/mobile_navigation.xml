@@ -13,13 +13,13 @@
 
 	<fragment
 		android:id="@+id/nav_gallery"
-		android:name="cc.kostic.a2rv.ui.gallery.GalleryFragment"
+		android:name="cc.kostic.a2rv.ui.recycler_plus_listener.ListenerFragment"
 		android:label="@string/menu_gallery"
-		tools:layout="@layout/fragment_gallery" />
+		tools:layout="@layout/klot_plus_listener" />
 
 	<fragment
 		android:id="@+id/nav_slideshow"
 		android:name="cc.kostic.a2rv.ui.recycler_klot.KlotFragment"
 		android:label="@string/menu_slideshow"
-		tools:layout="@layout/fragment_slideshow" />
+		tools:layout="@layout/klot_fragment" />
 </navigation>
