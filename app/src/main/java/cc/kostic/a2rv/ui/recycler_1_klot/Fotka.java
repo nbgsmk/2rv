@@ -1,4 +1,4 @@
-package cc.kostic.a2rv.ui.recycler_klot;
+package cc.kostic.a2rv.ui.recycler_1_klot;
 
 public class Fotka {
 	private String naziv;

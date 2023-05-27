@@ -12,14 +12,20 @@
 		tools:layout="@layout/fragment_home" />
 
 	<fragment
-		android:id="@+id/nav_gallery"
-		android:name="cc.kostic.a2rv.ui.recycler_plus_listener.ListenerFragment"
-		android:label="@string/menu_gallery"
-		tools:layout="@layout/klot_plus_listener" />
+		android:id="@+id/nav_1"
+		android:name="cc.kostic.a2rv.ui.recycler_1_klot.KlotFragment"
+		android:label="Klot"
+		tools:layout="@layout/klot_1_fragment" />
 
 	<fragment
-		android:id="@+id/nav_slideshow"
-		android:name="cc.kostic.a2rv.ui.recycler_klot.KlotFragment"
-		android:label="@string/menu_slideshow"
-		tools:layout="@layout/klot_fragment" />
+		android:id="@+id/nav_2"
+		android:name="cc.kostic.a2rv.ui.recycler_2_plus_listener.ListenerFragment"
+		android:label="Listener interface"
+		tools:layout="@layout/klot_2_plus_listener" />
+
+	<fragment
+		android:id="@+id/nav_3"
+		android:name="cc.kostic.a2rv.ui.recycler_3_drag.DragFragment"
+		android:label="ItemTouchHelper"
+		tools:layout="@layout/klot_3_drag_swipe" />
 </navigation>

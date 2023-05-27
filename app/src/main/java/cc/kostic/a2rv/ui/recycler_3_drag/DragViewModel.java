@@ -1,4 +1,4 @@
-package cc.kostic.a2rv.ui.recycler_plus_listener;
+package cc.kostic.a2rv.ui.recycler_3_drag;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -6,15 +6,15 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import cc.kostic.a2rv.ui.recycler_klot.Fotka;
-import cc.kostic.a2rv.ui.recycler_klot.FotkaSource;
+import cc.kostic.a2rv.ui.recycler_1_klot.Fotka;
+import cc.kostic.a2rv.ui.recycler_1_klot.FotkaSource;
 
-public class ListenerViewModel extends ViewModel {
+public class DragViewModel extends ViewModel {
 
 	private final MutableLiveData<String> mText = new MutableLiveData<>();
 
-	public ListenerViewModel() {
-		mText.setValue("Recycler \n onClick interface -> parent Fragment");
+	public DragViewModel() {
+		mText.setValue("Recycler ItemTouchHelper \n swipe & drag");
 	}
 
 	public LiveData<String> getText() {
@@ -23,7 +23,7 @@ public class ListenerViewModel extends ViewModel {
 
 	public List<Fotka> getFotke() {
 		FotkaSource source = new FotkaSource();
-		List<Fotka> fotke = source.getData(200);
+		List<Fotka> fotke = source.getData(50);
 		return fotke;
 	}
 }

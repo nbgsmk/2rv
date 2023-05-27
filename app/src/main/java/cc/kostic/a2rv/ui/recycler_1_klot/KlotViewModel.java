@@ -1,4 +1,4 @@
-package cc.kostic.a2rv.ui.recycler_klot;
+package cc.kostic.a2rv.ui.recycler_1_klot;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -11,7 +11,7 @@ public class KlotViewModel extends ViewModel {
 	private final MutableLiveData<String> mText = new MutableLiveData<>();
 
 	public KlotViewModel() {
-		mText.setValue("Klot recycler \n onClick -> ViewHolder konstruktor");
+		mText.setValue("Klot recycler \n onClick -> adapter");
 
 	}
 

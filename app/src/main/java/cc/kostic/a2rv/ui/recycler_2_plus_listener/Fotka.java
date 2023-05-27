@@ -1,4 +1,4 @@
-package cc.kostic.a2rv.ui.recycler_plus_listener;
+package cc.kostic.a2rv.ui.recycler_2_plus_listener;
 
 public class Fotka {
 	private String naziv;
