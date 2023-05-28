@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 public class ItemMoveCallback extends ItemTouchHelper.Callback {
-	private final ItemMoveCallback.ItemTouchHelperContract adapter;
+	private final ItemTouch_Interface adapter;
 
-	public ItemMoveCallback(ItemMoveCallback.ItemTouchHelperContract adapter) {
+	public ItemMoveCallback(ItemTouch_Interface adapter) {
 		this.adapter = adapter;
 	}
 
@@ -73,14 +73,14 @@ public class ItemMoveCallback extends ItemTouchHelper.Callback {
 		}
 	}
 
-	public interface ItemTouchHelperContract {
+	public interface ItemTouch_Interface {
 		void onSwiped(int position, int swipeDirection);
 		void onMove(int fromPosition, int toPosition);
 		void onSelectedChanged(RisajklerAdapter.FotkaHolder myViewHolder);
 		void onClearView(RisajklerAdapter.FotkaHolder myViewHolder);
 
 		// drag by handle instead od long click
-		// void requestDrag(RecyclerView.ViewHolder viewHolder);
+		// void sDr(RecyclerView.ViewHolder viewHolder);
 
 	}
 

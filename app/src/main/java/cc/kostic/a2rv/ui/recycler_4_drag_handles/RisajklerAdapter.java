@@ -18,7 +18,7 @@ import cc.kostic.a2rv.R;
 import cc.kostic.a2rv.ui.data.Fotka;
 
 public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.FotkaHolder>
-		implements ItemMoveCallback.ItemTouchHelperContract
+		implements ItemMoveCallback.ItemTouch_Interface
 {
 
 
@@ -28,10 +28,10 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 
 	private final List<Fotka> lista;
 	private RisajklerAdapter.Klik_listener klik_listener;
-	private final StartDragListener startDragListener;
-	public RisajklerAdapter(List<Fotka> fotke, StartDragListener startDragListener) {
+	private final DragHandleListener dragHandleListener;
+	public RisajklerAdapter(List<Fotka> fotke, DragHandleListener dragHandleListener) {
 		this.lista = fotke;
-		this.startDragListener = startDragListener;
+		this.dragHandleListener = dragHandleListener;
 	}
 
 	@NonNull
@@ -53,7 +53,7 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 			@Override
 			public boolean onTouch(View view, MotionEvent motionEvent) {
 				if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-					startDragListener.requestDrag(holder);
+					dragHandleListener.startDrag(holder);
 				}
 				return false;
 			}
@@ -102,11 +102,6 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 		myViewHolder.itemView.setBackgroundColor(Color.WHITE);
 
 	}
-
-
-
-
-
 
 
 

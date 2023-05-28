@@ -21,16 +21,16 @@ import cc.kostic.a2rv.databinding.Klot4DragHandlesBinding;
 import cc.kostic.a2rv.ui.data.Fotka;
 
 
-public class DragHandlesFragment extends Fragment
+public class DragHandlesFragmentHandle extends Fragment
 		implements
 		RisajklerAdapter.Klik_listener
 	,
-		StartDragListener
+		DragHandleListener
 
 {
 
 	private Klot4DragHandlesBinding binding;
-	ItemTouchHelper helper;
+	ItemTouchHelper touchHelper;
 
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,8 +64,8 @@ public class DragHandlesFragment extends Fragment
 		rv.setItemAnimator(new DefaultItemAnimator());
 
 		ItemTouchHelper.Callback callback = new ItemMoveCallback(adapter);
-		helper = new ItemTouchHelper(callback);
-		helper.attachToRecyclerView(rv);
+		touchHelper = new ItemTouchHelper(callback);
+		touchHelper.attachToRecyclerView(rv);
 		rv.setAdapter(adapter);
 
 		return binding.getRoot();
@@ -103,7 +103,7 @@ public class DragHandlesFragment extends Fragment
 
 
 	@Override
-	public void requestDrag(RecyclerView.ViewHolder viewHolder) {
-		helper.startDrag(viewHolder);
+	public void startDrag(RecyclerView.ViewHolder viewHolder) {
+		touchHelper.startDrag(viewHolder);
 	}
 }
