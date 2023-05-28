@@ -20,5 +20,9 @@
 			android:id="@+id/nav_3"
 			android:icon="@drawable/ic_menu_gallery"
 			android:title="Klot + drag, swipe" />
+		<item
+			android:id="@+id/nav_4"
+			android:icon="@drawable/ic_menu_gallery"
+			android:title="Klot + drag handles" />
 	</group>
 </menu>

@@ -28,4 +28,10 @@
 		android:name="cc.kostic.a2rv.ui.recycler_3_drag.DragFragment"
 		android:label="ItemTouchHelper"
 		tools:layout="@layout/klot_3_drag_swipe" />
+
+	<fragment
+		android:id="@+id/nav_4"
+		android:name="cc.kostic.a2rv.ui.recycler_4_drag_handles.DragHandlesFragment"
+		android:label="Drag with handles"
+		tools:layout="@layout/klot_4_drag_handles" />
 </navigation>

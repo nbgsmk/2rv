@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import cc.kostic.a2rv.ui.data.Fotka;
+import cc.kostic.a2rv.ui.data.FotkaSource;
+
 public class ListenerViewModel extends ViewModel {
 
 	private final MutableLiveData<String> mText = new MutableLiveData<>();

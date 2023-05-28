@@ -1,4 +1,4 @@
-package cc.kostic.a2rv.ui.recycler_3_drag;
+package cc.kostic.a2rv.ui.recycler_4_drag_handles;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,21 +17,25 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import cc.kostic.a2rv.databinding.Klot3DragSwipeBinding;
+import cc.kostic.a2rv.databinding.Klot4DragHandlesBinding;
 import cc.kostic.a2rv.ui.data.Fotka;
 
 
-public class DragFragment extends Fragment
+public class DragHandlesFragment extends Fragment
 		implements
 		RisajklerAdapter.Klik_listener
+	,
+		StartDragListener
 
 {
 
-	private Klot3DragSwipeBinding binding;
+	private Klot4DragHandlesBinding binding;
+	ItemTouchHelper helper;
+
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		binding = Klot3DragSwipeBinding.inflate(inflater, container, false);
-		DragViewModel model = new ViewModelProvider(this).get(DragViewModel.class);
+		binding = Klot4DragHandlesBinding.inflate(inflater, container, false);
+		DragHandlesViewModel model = new ViewModelProvider(this).get(DragHandlesViewModel.class);
 
 		LifecycleOwner vlo = getViewLifecycleOwner();
 		model.getText().observe(vlo, new Observer<String>() {
@@ -42,7 +46,7 @@ public class DragFragment extends Fragment
 		});
 
 		RecyclerView rv = binding.rv;
-		RisajklerAdapter adapter = new RisajklerAdapter(model.getFotke());
+		RisajklerAdapter adapter = new RisajklerAdapter(model.getFotke(), this);
 		adapter.setHasStableIds(true);
 		adapter.setKlikIntf(this);
 
@@ -60,10 +64,9 @@ public class DragFragment extends Fragment
 		rv.setItemAnimator(new DefaultItemAnimator());
 
 		ItemTouchHelper.Callback callback = new ItemMoveCallback(adapter);
-		ItemTouchHelper helper = new ItemTouchHelper(callback);
+		helper = new ItemTouchHelper(callback);
 		helper.attachToRecyclerView(rv);
 		rv.setAdapter(adapter);
-
 
 		return binding.getRoot();
 
@@ -97,4 +100,10 @@ public class DragFragment extends Fragment
 	// public void onRowClear(RisajklerAdapter.FotkaHolder myViewHolder) {
 	//
 	// }
+
+
+	@Override
+	public void requestDrag(RecyclerView.ViewHolder viewHolder) {
+		helper.startDrag(viewHolder);
+	}
 }
