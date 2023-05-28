@@ -11,17 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import cc.kostic.a2rv.R;
-import cc.kostic.a2rv.ui.recycler_1_klot.Fotka;
 
 public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.FotkaHolder>{
 	public interface Klik_listener {
 		void onItemClick(View view, int position);
 	}
 
-	private final List<cc.kostic.a2rv.ui.recycler_1_klot.Fotka> lista;
+	private final List<Fotka> lista;
 	private Klik_listener klik_listener;
 
-	public RisajklerAdapter(List<cc.kostic.a2rv.ui.recycler_1_klot.Fotka> fotke) {
+	public RisajklerAdapter(List<Fotka> fotke) {
 		this.lista = fotke;
 	}
 

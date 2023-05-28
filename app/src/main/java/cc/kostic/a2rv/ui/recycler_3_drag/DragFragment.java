@@ -14,11 +14,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import cc.kostic.a2rv.databinding.Klot3DragSwipeBinding;
+
 
 public class DragFragment extends Fragment
 		implements
@@ -46,10 +46,10 @@ public class DragFragment extends Fragment
 
 		int koji = 1;
 		if (koji==1) {
-			GridLayoutManager glm = new GridLayoutManager(requireContext(), 1);
+			GridLayoutManager glm = new GridLayoutManager(requireContext(), 2);
 			rv.setLayoutManager(glm);
 		} else if (koji==2) {
-			StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+			StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 			sglm.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
 			rv.setLayoutManager(sglm);
 		}
@@ -75,8 +75,10 @@ public class DragFragment extends Fragment
 
 
 	@Override
-	public void onItemClick(View view, int position) {
-		Toast.makeText(view.getContext(), "fragment: klik pos " + position, Toast.LENGTH_SHORT).show();
+	public void onClickItem(View view, Fotka fotka, int position) {
+		String msg = "fragmen click: pos-" + position + ", item-" + fotka.getNaziv();
+		Toast.makeText(view.getContext(), msg, Toast.LENGTH_SHORT).show();
+
 	}
 
 	// @Override

@@ -5,10 +5,10 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ItemMoveCallback extends ItemTouchHelper.Callback {
-	private final ItemTouchHelperContract mAdapter;
+	private final ItemTouchHelperContract adapter;
 
 	public ItemMoveCallback(ItemTouchHelperContract adapter) {
-		mAdapter = adapter;
+		this.adapter = adapter;
 	}
 
 	@Override
@@ -18,57 +18,65 @@ public class ItemMoveCallback extends ItemTouchHelper.Callback {
 
 	@Override
 	public boolean isItemViewSwipeEnabled() {
-		return true;
+		return false;
 	}
 
 
 
 	@Override
-	public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+	public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+		// int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+		// int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
 
-	}
-
-	@Override
-	public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-		int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-		int swipeFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+		int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END;
+		int swipeFlags = 0;
 		return makeMovementFlags(dragFlags, swipeFlags);
 	}
 
 	@Override
-	public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-		mAdapter.onRowMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+	public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+		// item deleted from adapter. system will call onClearView
+		int position = viewHolder.getAdapterPosition();
+		adapter.onSwiped(position, i);
+	}
+
+
+	@Override
+	public boolean onMove(@NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+		// drag and drop starting. after returning true, system will call onMoved
+		adapter.onMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
 		return true;
 	}
 
+
 	@Override
 	public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
-
+		super.onSelectedChanged(viewHolder, actionState);
+		// item selected an drag or swipe is about to start
 		if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
 			if (viewHolder instanceof RisajklerAdapter.FotkaHolder) {
 				RisajklerAdapter.FotkaHolder myViewHolder= (RisajklerAdapter.FotkaHolder) viewHolder;
-				mAdapter.onRowSelected(myViewHolder);
+				adapter.onSelectedChanged(myViewHolder);
 			}
 
 		}
 
-		super.onSelectedChanged(viewHolder, actionState);
 	}
 	@Override
-	public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+	public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
 		super.clearView(recyclerView, viewHolder);
-
+		// inteaction with element is done and animation is completed
 		if (viewHolder instanceof RisajklerAdapter.FotkaHolder) {
 			RisajklerAdapter.FotkaHolder myViewHolder= (RisajklerAdapter.FotkaHolder) viewHolder;
-			mAdapter.onRowClear(myViewHolder);
+			adapter.onClearView(myViewHolder);
 		}
 	}
 
 	public interface ItemTouchHelperContract {
-
-		void onRowMoved(int fromPosition, int toPosition);
-		void onRowSelected(RisajklerAdapter.FotkaHolder myViewHolder);
-		void onRowClear(RisajklerAdapter.FotkaHolder myViewHolder);
+		void onSwiped(int position, int swipeDirection);
+		void onMove(int fromPosition, int toPosition);
+		void onSelectedChanged(RisajklerAdapter.FotkaHolder myViewHolder);
+		void onClearView(RisajklerAdapter.FotkaHolder myViewHolder);
 
 	}
 

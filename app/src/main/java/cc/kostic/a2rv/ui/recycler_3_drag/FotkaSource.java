@@ -3,7 +3,6 @@ package cc.kostic.a2rv.ui.recycler_3_drag;
 import java.util.ArrayList;
 import java.util.List;
 
-import cc.kostic.a2rv.ui.recycler_1_klot.Fotka;
 
 public class FotkaSource {
 

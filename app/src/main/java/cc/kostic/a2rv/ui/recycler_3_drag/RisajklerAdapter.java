@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 import cc.kostic.a2rv.R;
-import cc.kostic.a2rv.ui.recycler_1_klot.Fotka;
+
 
 public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.FotkaHolder>
 	implements ItemMoveCallback.ItemTouchHelperContract
@@ -21,7 +21,7 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 
 
 	public interface Klik_listener {
-		void onItemClick(View view, int position);
+		void onClickItem(View view, Fotka fotka, int position);
 	}
 
 	private final List<Fotka> lista;
@@ -59,11 +59,14 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 
 
 
-
-
+	@Override
+	public void onSwiped(int position, int swipeDirection) {
+		lista.remove(position);
+		notifyItemRemoved(position);
+	}
 
 	@Override
-	public void onRowMoved(int fromPosition, int toPosition) {
+	public void onMove(int fromPosition, int toPosition) {
 		if (fromPosition < toPosition) {
 			for (int i = fromPosition; i < toPosition; i++) {
 				Collections.swap(lista, i, i + 1);
@@ -77,13 +80,13 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 	}
 
 	@Override
-	public void onRowSelected(FotkaHolder myViewHolder) {
+	public void onSelectedChanged(FotkaHolder myViewHolder) {
 		myViewHolder.itemView.setBackgroundColor(Color.GRAY);
 
 	}
 
 	@Override
-	public void onRowClear(FotkaHolder myViewHolder) {
+	public void onClearView(FotkaHolder myViewHolder) {
 		myViewHolder.itemView.setBackgroundColor(Color.WHITE);
 
 	}
@@ -119,7 +122,8 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 		@Override
 		public void onClick(View view) {
 			if ( klik_listener != null){
-				klik_listener.onItemClick(view, getAdapterPosition());
+				int position = getAdapterPosition();
+				klik_listener.onClickItem(view, lista.get(position), position);
 			}
 		}
 
