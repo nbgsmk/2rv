@@ -43,7 +43,6 @@ public class DragFragment extends Fragment
 
 		RecyclerView rv = binding.rv;
 		RisajklerAdapter adapter = new RisajklerAdapter(model.getFotke());
-		adapter.setHasStableIds(true);
 		adapter.setKlikIntf(this);
 
 		int koji = 1;

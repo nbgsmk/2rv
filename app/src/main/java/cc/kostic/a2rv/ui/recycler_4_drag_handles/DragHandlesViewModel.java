@@ -23,7 +23,7 @@ public class DragHandlesViewModel extends ViewModel {
 
 	public List<Fotka> getFotke() {
 		FotkaSource source = new FotkaSource();
-		List<Fotka> fotke = source.getData(50);
+		List<Fotka> fotke = source.getData(200);
 		return fotke;
 	}
 }

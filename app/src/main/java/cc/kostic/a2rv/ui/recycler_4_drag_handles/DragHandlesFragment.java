@@ -21,11 +21,11 @@ import cc.kostic.a2rv.databinding.Klot4DragHandlesBinding;
 import cc.kostic.a2rv.ui.data.Fotka;
 
 
-public class DragHandlesFragmentHandle extends Fragment
+public class DragHandlesFragment extends Fragment
 		implements
 		RisajklerAdapter.Klik_listener
 	,
-		DragHandleListener
+		DragHandlesListener
 
 {
 
@@ -47,12 +47,11 @@ public class DragHandlesFragmentHandle extends Fragment
 
 		RecyclerView rv = binding.rv;
 		RisajklerAdapter adapter = new RisajklerAdapter(model.getFotke(), this);
-		adapter.setHasStableIds(true);
 		adapter.setKlikIntf(this);
 
 		int koji = 1;
 		if (koji==1) {
-			GridLayoutManager glm = new GridLayoutManager(requireContext(), 2);
+			GridLayoutManager glm = new GridLayoutManager(requireContext(), 1);
 			rv.setLayoutManager(glm);
 		} else if (koji==2) {
 			StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);

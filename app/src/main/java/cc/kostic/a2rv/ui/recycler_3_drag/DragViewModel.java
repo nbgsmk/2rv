@@ -15,7 +15,7 @@ public class DragViewModel extends ViewModel {
 	private final MutableLiveData<String> mText = new MutableLiveData<>();
 
 	public DragViewModel() {
-		mText.setValue("Recycler ItemTouchHelper \n swipe & drag");
+		mText.setValue("ItemTouchHelper \n drag by long click \n swipe to delete");
 	}
 
 	public LiveData<String> getText() {
@@ -24,7 +24,7 @@ public class DragViewModel extends ViewModel {
 
 	public List<Fotka> getFotke() {
 		FotkaSource source = new FotkaSource();
-		List<Fotka> fotke = source.getData(50);
+		List<Fotka> fotke = source.getData(200);
 		return fotke;
 	}
 }

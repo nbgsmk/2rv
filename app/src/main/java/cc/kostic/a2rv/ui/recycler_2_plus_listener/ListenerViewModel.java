@@ -14,7 +14,7 @@ public class ListenerViewModel extends ViewModel {
 	private final MutableLiveData<String> mText = new MutableLiveData<>();
 
 	public ListenerViewModel() {
-		mText.setValue("Recycler \n onClick interface -> parent Fragment");
+		mText.setValue("onClick interface -> in parent Fragment");
 	}
 
 	public LiveData<String> getText() {

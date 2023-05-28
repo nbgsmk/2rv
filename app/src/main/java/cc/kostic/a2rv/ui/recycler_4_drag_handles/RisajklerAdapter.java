@@ -28,10 +28,10 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 
 	private final List<Fotka> lista;
 	private RisajklerAdapter.Klik_listener klik_listener;
-	private final DragHandleListener dragHandleListener;
-	public RisajklerAdapter(List<Fotka> fotke, DragHandleListener dragHandleListener) {
+	private final DragHandlesListener dragHandlesListener;
+	public RisajklerAdapter(List<Fotka> fotke, DragHandlesListener dragHandlesListener) {
 		this.lista = fotke;
-		this.dragHandleListener = dragHandleListener;
+		this.dragHandlesListener = dragHandlesListener;
 	}
 
 	@NonNull
@@ -53,7 +53,7 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 			@Override
 			public boolean onTouch(View view, MotionEvent motionEvent) {
 				if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-					dragHandleListener.startDrag(holder);
+					dragHandlesListener.startDrag(holder);
 				}
 				return false;
 			}
