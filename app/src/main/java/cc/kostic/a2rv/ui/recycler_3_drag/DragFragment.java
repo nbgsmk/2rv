@@ -11,12 +11,20 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import cc.kostic.a2rv.databinding.Klot3DragSwipeBinding;
 
-public class DragFragment extends Fragment implements RisajklerAdapter.Klik_listener {
+public class DragFragment extends Fragment
+		implements
+		RisajklerAdapter.Klik_listener
+
+{
 
 	private Klot3DragSwipeBinding binding;
 
@@ -35,9 +43,25 @@ public class DragFragment extends Fragment implements RisajklerAdapter.Klik_list
 		RecyclerView rv = binding.rv;
 		RisajklerAdapter adapter = new RisajklerAdapter(model.getFotke());
 		adapter.setKlikIntf(this);
-		rv.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+		int koji = 1;
+		if (koji==1) {
+			GridLayoutManager glm = new GridLayoutManager(requireContext(), 1);
+			rv.setLayoutManager(glm);
+		} else if (koji==2) {
+			StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+			sglm.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
+			rv.setLayoutManager(sglm);
+		}
+
 		rv.setHasFixedSize(true);
+		rv.setItemAnimator(new DefaultItemAnimator());
+
+		ItemTouchHelper.Callback callback = new ItemMoveCallback(adapter);
+		ItemTouchHelper helper = new ItemTouchHelper(callback);
+		helper.attachToRecyclerView(rv);
 		rv.setAdapter(adapter);
+
 
 		return binding.getRoot();
 
@@ -54,4 +78,19 @@ public class DragFragment extends Fragment implements RisajklerAdapter.Klik_list
 	public void onItemClick(View view, int position) {
 		Toast.makeText(view.getContext(), "fragment: klik pos " + position, Toast.LENGTH_SHORT).show();
 	}
+
+	// @Override
+	// public void onRowMoved(int fromPosition, int toPosition) {
+	//
+	// }
+	//
+	// @Override
+	// public void onRowSelected(RisajklerAdapter.FotkaHolder holder) {
+	//
+	// }
+	//
+	// @Override
+	// public void onRowClear(RisajklerAdapter.FotkaHolder myViewHolder) {
+	//
+	// }
 }

@@ -1,5 +1,6 @@
 package cc.kostic.a2rv.ui.recycler_3_drag;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collections;
 import java.util.List;
 
 import cc.kostic.a2rv.R;
 import cc.kostic.a2rv.ui.recycler_1_klot.Fotka;
 
-public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.FotkaHolder>{
+public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.FotkaHolder>
+	implements ItemMoveCallback.ItemTouchHelperContract
+{
+
+
 	public interface Klik_listener {
 		void onItemClick(View view, int position);
 	}
@@ -48,6 +54,39 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 	}
 
 
+
+
+
+
+
+
+
+
+	@Override
+	public void onRowMoved(int fromPosition, int toPosition) {
+		if (fromPosition < toPosition) {
+			for (int i = fromPosition; i < toPosition; i++) {
+				Collections.swap(lista, i, i + 1);
+			}
+		} else {
+			for (int i = fromPosition; i > toPosition; i--) {
+				Collections.swap(lista, i, i - 1);
+			}
+		}
+		notifyItemMoved(fromPosition, toPosition);
+	}
+
+	@Override
+	public void onRowSelected(FotkaHolder myViewHolder) {
+		myViewHolder.itemView.setBackgroundColor(Color.GRAY);
+
+	}
+
+	@Override
+	public void onRowClear(FotkaHolder myViewHolder) {
+		myViewHolder.itemView.setBackgroundColor(Color.WHITE);
+
+	}
 
 
 
