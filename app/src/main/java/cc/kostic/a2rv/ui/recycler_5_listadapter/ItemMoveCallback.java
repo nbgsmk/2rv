@@ -1,4 +1,4 @@
-package cc.kostic.a2rv.ui.recycler_4_drag_handles;
+package cc.kostic.a2rv.ui.recycler_5_listadapter;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -26,17 +26,17 @@ public class ItemMoveCallback extends ItemTouchHelper.Callback {
 
 	@Override
 	public boolean isItemViewSwipeEnabled() {
-		return false;
+		return true;
 	}
 
 
 	@Override
 	public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-		// int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-		// int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+		int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+		int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
 
-		int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END;
-		int swipeFlags = 0;
+		// int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END;
+		// int swipeFlags = 0;
 		return makeMovementFlags(dragFlags, swipeFlags);
 	}
 

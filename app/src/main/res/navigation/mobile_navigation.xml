@@ -34,4 +34,10 @@
 		android:name="cc.kostic.a2rv.ui.recycler_4_drag_handles.DragHandlesFragment"
 		android:label="Drag with handles"
 		tools:layout="@layout/klot_4_drag_handles" />
+
+	<fragment
+		android:id="@+id/nav_5"
+		android:name="cc.kostic.a2rv.ui.recycler_5_listadapter.ListFragment"
+		android:label="Recycler with DiffUtil"
+		tools:layout="@layout/klot_5_drag_handles" />
 </navigation>
