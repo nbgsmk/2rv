@@ -46,12 +46,13 @@ public class DragHandlesFragment extends Fragment
 		});
 
 		RecyclerView rv = binding.rv;
-		RisajklerAdapter adapter = new RisajklerAdapter(model.getFotke(), this);
-		adapter.setKlikIntf(this);
+		RisajklerAdapter adapter = new RisajklerAdapter(model.getFotke());
+		adapter.setKlikListener(this);
+		adapter.setDragListener(this);
 
 		int koji = 1;
 		if (koji==1) {
-			GridLayoutManager glm = new GridLayoutManager(requireContext(), 1);
+			GridLayoutManager glm = new GridLayoutManager(requireContext(), 2);
 			rv.setLayoutManager(glm);
 		} else if (koji==2) {
 			StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
@@ -80,10 +81,16 @@ public class DragHandlesFragment extends Fragment
 
 	@Override
 	public void onClickItem(View view, Fotka fotka, int position) {
-		String msg = "fragmen click: pos-" + position + ", item-" + fotka.getNaziv();
+		String msg = "fragment click: pos-" + position + ", item-" + fotka.getNaziv();
 		Toast.makeText(view.getContext(), msg, Toast.LENGTH_SHORT).show();
-
 	}
+	@Override
+	public boolean onLongClickItem(View view, Fotka fotka, int position) {
+			String msg = "fragment long click: pos-" + position + ", item-" + fotka.getNaziv();
+			Toast.makeText(view.getContext(), msg, Toast.LENGTH_SHORT).show();
+		return false;
+	}
+
 
 	// @Override
 	// public void onRowMoved(int fromPosition, int toPosition) {

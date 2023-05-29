@@ -6,10 +6,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 public class ItemMoveCallback extends ItemTouchHelper.Callback {
-	private final ItemTouch_Interface adapter;
+	public interface ItemTouch_Interface {
+		void onSwiped(int position, int swipeDirection);
+		void onMove(int fromPosition, int toPosition);
+		void onSelectedChanged(RisajklerAdapter.FotkaHolder myViewHolder);
+		void onClearView(RisajklerAdapter.FotkaHolder myViewHolder);
+	}
 
-	public ItemMoveCallback(ItemTouch_Interface adapter) {
-		this.adapter = adapter;
+	private final ItemTouch_Interface listener;
+
+	public ItemMoveCallback(ItemTouch_Interface listener) {
+		this.listener = listener;
 	}
 
 	@Override
@@ -38,14 +45,14 @@ public class ItemMoveCallback extends ItemTouchHelper.Callback {
 	public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 		// item deleted from adapter. system will call onClearView
 		int position = viewHolder.getAdapterPosition();
-		adapter.onSwiped(position, i);
+		listener.onSwiped(position, i);
 	}
 
 
 	@Override
 	public boolean onMove(@NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
 		// drag and drop starting. after returning true, system will call onMoved
-		adapter.onMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+		listener.onMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
 		return true;
 	}
 
@@ -57,7 +64,7 @@ public class ItemMoveCallback extends ItemTouchHelper.Callback {
 		if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
 			if (viewHolder instanceof RisajklerAdapter.FotkaHolder) {
 				RisajklerAdapter.FotkaHolder myViewHolder= (RisajklerAdapter.FotkaHolder) viewHolder;
-				adapter.onSelectedChanged(myViewHolder);
+				listener.onSelectedChanged(myViewHolder);
 			}
 
 		}
@@ -69,19 +76,8 @@ public class ItemMoveCallback extends ItemTouchHelper.Callback {
 		// inteaction with element is done and animation is completed
 		if (viewHolder instanceof RisajklerAdapter.FotkaHolder) {
 			RisajklerAdapter.FotkaHolder myViewHolder= (RisajklerAdapter.FotkaHolder) viewHolder;
-			adapter.onClearView(myViewHolder);
+			listener.onClearView(myViewHolder);
 		}
-	}
-
-	public interface ItemTouch_Interface {
-		void onSwiped(int position, int swipeDirection);
-		void onMove(int fromPosition, int toPosition);
-		void onSelectedChanged(RisajklerAdapter.FotkaHolder myViewHolder);
-		void onClearView(RisajklerAdapter.FotkaHolder myViewHolder);
-
-		// drag by handle instead od long click
-		// void sDr(RecyclerView.ViewHolder viewHolder);
-
 	}
 
 }

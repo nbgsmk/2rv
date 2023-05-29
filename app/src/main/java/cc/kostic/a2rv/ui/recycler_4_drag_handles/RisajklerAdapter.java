@@ -21,17 +21,23 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 		implements ItemMoveCallback.ItemTouch_Interface
 {
 
-
 	public interface Klik_listener {
 		void onClickItem(View view, Fotka fotka, int position);
+		boolean onLongClickItem(View view, Fotka fotka, int position);
 	}
 
 	private final List<Fotka> lista;
 	private RisajklerAdapter.Klik_listener klik_listener;
-	private final DragHandlesListener dragHandlesListener;
-	public RisajklerAdapter(List<Fotka> fotke, DragHandlesListener dragHandlesListener) {
+	private DragHandlesListener dragHandlesListener;
+	public RisajklerAdapter(List<Fotka> fotke) {
 		this.lista = fotke;
-		this.dragHandlesListener = dragHandlesListener;
+	}
+
+	void setKlikListener(DragHandlesFragment listener){
+		this.klik_listener = listener;
+	}
+	void setDragListener(DragHandlesFragment listener){
+		this.dragHandlesListener = listener;
 	}
 
 	@NonNull
@@ -116,14 +122,6 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 			tv_cena = itemView.findViewById(R.id.tv_cena);
 			iv_drag = itemView.findViewById(R.id.iv_drag);
 
-			// itemView.setOnClickListener(new View.OnClickListener() {
-			// 	@Override
-			// 	public void onClick(View view) {
-			// 		int pos = getAdapterPosition();
-			// 		Toast.makeText(itemView.getContext(), "klik pos " + pos, Toast.LENGTH_SHORT).show();
-			// 	}
-			// });
-
 			itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -134,24 +132,15 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 				}
 			});
 
-
+			itemView.setOnLongClickListener(new View.OnLongClickListener() {
+				@Override
+				public boolean onLongClick(View view) {
+					return false;
+				}
+			});
 
 		}
 
-		// @Override
-		// public void onClick(View view) {
-		// 	if ( klik_listener != null){
-		// 		int position = getAdapterPosition();
-		// 		klik_listener.onClickItem(view, lista.get(position), position);
-		// 	}
-		// }
-
 	}
-
-	void setKlikIntf(RisajklerAdapter.Klik_listener listener){
-		this.klik_listener = listener;
-	}
-
-
 
 }
