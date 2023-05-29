@@ -1,4 +1,4 @@
-package cc.kostic.a2rv.ui.data;
+package cc.kostic.a2rv.data;
 
 public class Fotka {
 	private static int ID;

@@ -9,17 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-
 import cc.kostic.a2rv.R;
-import cc.kostic.a2rv.ui.data.Fotka;
+import cc.kostic.a2rv.data.Fotka;
 
 public class RisajklerAdapter extends ListAdapter<Fotka, RisajklerAdapter.FotkaHolder>
 		implements ItemMoveCallback.ItemTouch_Interface {

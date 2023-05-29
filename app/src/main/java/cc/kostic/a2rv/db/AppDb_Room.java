@@ -1,4 +1,4 @@
-package cc.kostic.a2rv.ui.db;
+package cc.kostic.a2rv.db;
 
 import android.content.Context;
 
@@ -11,15 +11,13 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+
 import java.util.List;
 
 import cc.kostic.a2rv.AppExecutors;
 
 @Database(entities = {Slika.class, User.class}, version = 1)
 public abstract class AppDb_Room extends RoomDatabase {
-	public abstract SlikaDao slikaDao();
-	public abstract UserDao userDao();
-
 
 	@VisibleForTesting
 	public static String DB_NAME = "recycler_test";
@@ -27,8 +25,8 @@ public abstract class AppDb_Room extends RoomDatabase {
 	public static final AppExecutors executors = new AppExecutors();
 	private final MutableLiveData<Boolean> isDatabaseCreated = new MutableLiveData<>();
 
-	public abstract SlikaDao uredjajDao();
-	public abstract UserDao dugmeDao();
+	public abstract SlikaDao slikaDao();
+	public abstract UserDao userDao();
 
 	public static AppDb_Room getInstance(final Context context, final AppExecutors executors) {
 		if (DB_INSTANCE == null) {
@@ -55,7 +53,6 @@ public abstract class AppDb_Room extends RoomDatabase {
 					public void onCreate(@NonNull SupportSQLiteDatabase db) {
 						super.onCreate(db);
 						executors.diskIO().execute(() -> {
-							AppDbDataGenerator.delay_inDebugMode();     // Add a delay to simulate a long-running operation
 							// Generate the data for pre-population
 							AppDb_Room database = AppDb_Room.getInstance(appContext, executors);
 							List<Slika> uredjajList = AppDbDataGenerator.getDummyUredjajs();

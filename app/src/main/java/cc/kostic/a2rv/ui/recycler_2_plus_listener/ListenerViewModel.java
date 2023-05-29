@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import cc.kostic.a2rv.ui.data.Fotka;
-import cc.kostic.a2rv.ui.data.FotkaSource;
+import cc.kostic.a2rv.data.Fotka;
+import cc.kostic.a2rv.data.FotkaSource;
 
 public class ListenerViewModel extends ViewModel {
 

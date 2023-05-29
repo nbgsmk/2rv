@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 import cc.kostic.a2rv.R;
-import cc.kostic.a2rv.ui.data.Fotka;
+import cc.kostic.a2rv.data.Fotka;
 
 
 public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.FotkaHolder>

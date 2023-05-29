@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import cc.kostic.a2rv.databinding.Klot4DragHandlesBinding;
-import cc.kostic.a2rv.ui.data.Fotka;
+import cc.kostic.a2rv.data.Fotka;
 
 
 public class DragHandlesFragment extends Fragment

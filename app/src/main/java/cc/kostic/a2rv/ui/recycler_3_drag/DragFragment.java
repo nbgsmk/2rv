@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import cc.kostic.a2rv.databinding.Klot3DragSwipeBinding;
-import cc.kostic.a2rv.ui.data.Fotka;
+import cc.kostic.a2rv.data.Fotka;
 
 
 public class DragFragment extends Fragment

@@ -1,9 +1,7 @@
-package cc.kostic.a2rv.ui.data;
+package cc.kostic.a2rv.data;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cc.kostic.a2rv.ui.data.Fotka;
 
 public class FotkaSource {
 

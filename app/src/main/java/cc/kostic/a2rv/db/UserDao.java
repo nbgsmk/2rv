@@ -1,4 +1,4 @@
-package cc.kostic.a2rv.ui.db;
+package cc.kostic.a2rv.db;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

@@ -2,8 +2,7 @@ package cc.kostic.a2rv;
 
 import android.app.Application;
 
-import cc.kostic.a2rv.ui.db.AppDb_Room;
-import cc.kostic.a2rv.ui.db.SlikaDao;
+import cc.kostic.a2rv.db.AppDb_Room;
 
 public class BasicApp extends Application {
 

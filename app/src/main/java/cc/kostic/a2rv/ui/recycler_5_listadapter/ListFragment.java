@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
@@ -21,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import cc.kostic.a2rv.databinding.Klot4DragHandlesBinding;
-import cc.kostic.a2rv.ui.data.Fotka;
+import cc.kostic.a2rv.data.Fotka;
 
 
 public class ListFragment extends Fragment
@@ -30,23 +31,21 @@ public class ListFragment extends Fragment
 	private Klot4DragHandlesBinding binding;
 	ItemTouchHelper touchHelper;
 
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+	}
+
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		binding = Klot4DragHandlesBinding.inflate(inflater, container, false);
-		ListViewModel model = new ViewModelProvider(this).get(ListViewModel.class);
-
-		LifecycleOwner vlo = getViewLifecycleOwner();
-		model.getText().observe(vlo, new Observer<String>() {
-			@Override
-			public void onChanged(String s) {
-				binding.tvNaslov.setText(s);
-			}
-		});
-
 
 		RecyclerView rv = binding.rv;
 		RisajklerAdapter adapter = new RisajklerAdapter();
 		adapter.setKlikListener(this);
 		adapter.setDragListener(this);
+		// rv.setHasFixedSize(true);
+		// rv.setItemAnimator(new DefaultItemAnimator());
+		rv.setAdapter(adapter);
 
 		int koji = 1;
 		if (koji == 1) {
@@ -58,9 +57,16 @@ public class ListFragment extends Fragment
 			rv.setLayoutManager(sglm);
 		}
 
-		rv.setHasFixedSize(true);
-		rv.setItemAnimator(new DefaultItemAnimator());
 
+		ListViewModel model = new ViewModelProvider(this).get(ListViewModel.class);
+
+		LifecycleOwner vlo = getViewLifecycleOwner();
+		model.getText().observe(vlo, new Observer<String>() {
+			@Override
+			public void onChanged(String s) {
+				binding.tvNaslov.setText(s);
+			}
+		});
 		model.getFotkeLive().observe(vlo, new Observer<List<Fotka>>() {
 			@Override
 			public void onChanged(List<Fotka> fotkas) {
@@ -92,7 +98,6 @@ public class ListFragment extends Fragment
 		});
 		touchHelper = new ItemTouchHelper(callback);
 		touchHelper.attachToRecyclerView(rv);
-		rv.setAdapter(adapter);
 
 		return binding.getRoot();
 	}
