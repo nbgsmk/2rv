@@ -2,7 +2,7 @@ package cc.kostic.a2rv;
 
 import android.app.Application;
 
-import cc.kostic.a2rv.db.AppDb_Room;
+import cc.kostic.a2rv.db.AppDb;
 
 public class BasicApp extends Application {
 
@@ -12,12 +12,10 @@ public class BasicApp extends Application {
 	public void onCreate() {
 		super.onCreate();
 		appExecutors = new AppExecutors();
-
-
 	}
 
-	public AppDb_Room getDatabase() {
-		return AppDb_Room.getInstance(this, appExecutors);
+	public AppDb getDatabase() {
+		return AppDb.getInstance(getApplicationContext());
 	}
 
 }

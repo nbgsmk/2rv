@@ -1,4 +1,4 @@
-package cc.kostic.a2rv.ui.recycler_5_listadapter;
+package cc.kostic.a2rv.ui.recycler_6_with_room;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,13 +20,14 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import java.util.Collections;
 import java.util.List;
 
-import cc.kostic.a2rv.databinding.Klot4DragHandlesBinding;
 import cc.kostic.a2rv.data.Fotka;
 import cc.kostic.a2rv.databinding.Klot5DragHandlesBinding;
+import cc.kostic.a2rv.db.Slika;
 
 
-public class ListFragment extends Fragment
-		implements RisajklerAdapter.Klik_listener, DragHandlesListener {
+public class RoomFragment extends Fragment
+		implements RisajklerAdapter.Klik_listener, DragHandlesListener
+{
 
 	private Klot5DragHandlesBinding binding;
 	ItemTouchHelper touchHelper;
@@ -41,9 +41,9 @@ public class ListFragment extends Fragment
 		binding = Klot5DragHandlesBinding.inflate(inflater, container, false);
 
 		RecyclerView rv = binding.rv;
-		RisajklerAdapter adapter = new RisajklerAdapter();
+		RisajklerAdapter adapter = new RisajklerAdapter(new RisajklerAdapter.WordDiff());
 		adapter.setKlikListener(this);
-		adapter.setDragListener(this);
+		// adapter.setDragListener(this);
 		// rv.setHasFixedSize(true);
 		// rv.setItemAnimator(new DefaultItemAnimator());
 		rv.setAdapter(adapter);
@@ -59,7 +59,7 @@ public class ListFragment extends Fragment
 		}
 
 
-		ListViewModel model = new ViewModelProvider(this).get(ListViewModel.class);
+		SlikaViewModel model = new ViewModelProvider(this).get(SlikaViewModel.class);
 
 		LifecycleOwner vlo = getViewLifecycleOwner();
 		model.getText().observe(vlo, new Observer<String>() {
@@ -68,37 +68,37 @@ public class ListFragment extends Fragment
 				binding.tvNaslov.setText(s);
 			}
 		});
-		model.getFotkeLive().observe(vlo, new Observer<List<Fotka>>() {
+		model.getSlike().observe(vlo, new Observer<List<Slika>>() {
 			@Override
-			public void onChanged(List<Fotka> fotkas) {
-				adapter.submitList(fotkas);
+			public void onChanged(List<Slika> slike) {
+				adapter.submitList(slike);
 			}
 		});
 
 
-		ItemTouchHelper.Callback callback = new ItemMoveCallback(adapter, new ItemMoveCallback.ItemTouch_DragSwipe() {
-			@Override
-			public void onSwiped(int position, int swipeDirection) {
-				model.deleteFotka(position);
-				adapter.notifyItemRemoved(position);
-			}
-
-			@Override
-			public void onMove(int fromPosition, int toPosition) {
-				if (fromPosition < toPosition) {
-					for (int i = fromPosition; i < toPosition; i++) {
-						Collections.swap(model.getFotke(), i, i + 1);
-					}
-				} else {
-					for (int i = fromPosition; i > toPosition; i--) {
-						Collections.swap(model.getFotke(), i, i - 1);
-					}
-				}
-				adapter.notifyItemMoved(fromPosition, toPosition);
-			}
-		});
-		touchHelper = new ItemTouchHelper(callback);
-		touchHelper.attachToRecyclerView(rv);
+		// ItemTouchHelper.Callback callback = new ItemMoveCallback(adapter, new ItemMoveCallback.ItemTouch_DragSwipe() {
+		// 	@Override
+		// 	public void onSwiped(int position, int swipeDirection) {
+		// 		model.deleteFotka(position);
+		// 		adapter.notifyItemRemoved(position);
+		// 	}
+		//
+		// 	@Override
+		// 	public void onMove(int fromPosition, int toPosition) {
+		// 		if (fromPosition < toPosition) {
+		// 			for (int i = fromPosition; i < toPosition; i++) {
+		// 				Collections.swap(model.getFotke(), i, i + 1);
+		// 			}
+		// 		} else {
+		// 			for (int i = fromPosition; i > toPosition; i--) {
+		// 				Collections.swap(model.getFotke(), i, i - 1);
+		// 			}
+		// 		}
+		// 		adapter.notifyItemMoved(fromPosition, toPosition);
+		// 	}
+		// });
+		// touchHelper = new ItemTouchHelper(callback);
+		// touchHelper.attachToRecyclerView(rv);
 
 		return binding.getRoot();
 	}
@@ -111,14 +111,14 @@ public class ListFragment extends Fragment
 
 
 	@Override
-	public void onClickItem(View view, Fotka fotka, int position) {
-		String msg = "fragment click: pos-" + position + ", item-" + fotka.getNaziv();
+	public void onClickItem(View view, Slika slika, int position) {
+		String msg = "Room frag click: pos-" + position + ", item-" + slika.getNaziv();
 		Toast.makeText(view.getContext(), msg, Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
-	public boolean onLongClickItem(View view, Fotka fotka, int position) {
-		String msg = "fragment long click: pos-" + position + ", item-" + fotka.getNaziv();
+	public boolean onLongClickItem(View view, Slika slika, int position) {
+		String msg = "Room frag long click: pos-" + position + ", item-" + slika.getNaziv();
 		Toast.makeText(view.getContext(), msg, Toast.LENGTH_SHORT).show();
 		return true;
 	}
@@ -144,6 +144,5 @@ public class ListFragment extends Fragment
 	public void startDrag(RecyclerView.ViewHolder viewHolder) {
 		touchHelper.startDrag(viewHolder);
 	}
-
 
 }
