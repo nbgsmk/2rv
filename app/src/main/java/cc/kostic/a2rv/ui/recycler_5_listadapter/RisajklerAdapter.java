@@ -74,24 +74,24 @@ public class RisajklerAdapter extends ListAdapter<Fotka, RisajklerAdapter.FotkaH
 
 
 
-	@Override
-	public void onSwiped(int position, int swipeDirection) {
-		// getCurrentList().remove(position);
-		// notifyItemRemoved(position);
-	}
+	// @Override
+	// public void onSwiped(int position, int swipeDirection) {
+	// 	// getCurrentList().remove(position);
+	// 	notifyItemRemoved(position);
+	// }
 
 	@Override
 	public void onMove(int fromPosition, int toPosition) {
-		if (fromPosition < toPosition) {
-			for (int i = fromPosition; i < toPosition; i++) {
-				Collections.swap(getCurrentList(), i, i + 1);
-			}
-		} else {
-			for (int i = fromPosition; i > toPosition; i--) {
-				Collections.swap(getCurrentList(), i, i - 1);
-			}
-		}
-		notifyItemMoved(fromPosition, toPosition);
+		// if (fromPosition < toPosition) {
+		// 	for (int i = fromPosition; i < toPosition; i++) {
+		// 		Collections.swap(getCurrentList(), i, i + 1);
+		// 	}
+		// } else {
+		// 	for (int i = fromPosition; i > toPosition; i--) {
+		// 		Collections.swap(getCurrentList(), i, i - 1);
+		// 	}
+		// }
+		// notifyItemMoved(fromPosition, toPosition);
 	}
 
 	@Override
@@ -152,6 +152,7 @@ public class RisajklerAdapter extends ListAdapter<Fotka, RisajklerAdapter.FotkaH
 			// User properties may have changed if reloaded from the DB, but ID is fixed
 			return oldFotka.getID() == newFotka.getID();
 		}
+
 
 
 		@Override

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import java.util.Collections;
 import java.util.List;
 
 import cc.kostic.a2rv.databinding.Klot4DragHandlesBinding;
@@ -49,7 +50,7 @@ public class ListFragment extends Fragment
 
 		int koji = 1;
 		if (koji == 1) {
-			GridLayoutManager glm = new GridLayoutManager(requireContext(), 2);
+			GridLayoutManager glm = new GridLayoutManager(requireContext(), 3);
 			rv.setLayoutManager(glm);
 		} else if (koji == 2) {
 			StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
@@ -67,7 +68,28 @@ public class ListFragment extends Fragment
 			}
 		});
 
-		ItemTouchHelper.Callback callback = new ItemMoveCallback(adapter);
+
+		ItemTouchHelper.Callback callback = new ItemMoveCallback(adapter, new ItemMoveCallback.ItemTouch_DragSwipe() {
+			@Override
+			public void onSwiped(int position, int swipeDirection) {
+				model.deleteFotka(position);
+				adapter.notifyItemRemoved(position);
+			}
+
+			@Override
+			public void onMove(int fromPosition, int toPosition) {
+				if (fromPosition < toPosition) {
+					for (int i = fromPosition; i < toPosition; i++) {
+						Collections.swap(model.getFotke(), i, i + 1);
+					}
+				} else {
+					for (int i = fromPosition; i > toPosition; i--) {
+						Collections.swap(model.getFotke(), i, i - 1);
+					}
+				}
+				adapter.notifyItemMoved(fromPosition, toPosition);
+			}
+		});
 		touchHelper = new ItemTouchHelper(callback);
 		touchHelper.attachToRecyclerView(rv);
 		rv.setAdapter(adapter);
@@ -116,5 +138,6 @@ public class ListFragment extends Fragment
 	public void startDrag(RecyclerView.ViewHolder viewHolder) {
 		touchHelper.startDrag(viewHolder);
 	}
+
 
 }

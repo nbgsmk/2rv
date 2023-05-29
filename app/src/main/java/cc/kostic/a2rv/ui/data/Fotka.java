@@ -2,17 +2,19 @@ package cc.kostic.a2rv.ui.data;
 
 public class Fotka {
 	private static int ID;
+
+	private int id;
 	private String naziv;
 	private String cena;
 
 	public Fotka(String naziv, String cena) {
-		ID++;
+		this.id = ID++;
 		this.naziv = naziv;
 		this.cena = cena;
 	}
 
 	public int getID() {
-		return ID;
+		return this.id;
 	}
 
 	public String getNaziv() {

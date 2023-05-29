@@ -7,16 +7,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ItemMoveCallback extends ItemTouchHelper.Callback {
 	public interface ItemTouch_Interface {
-		void onSwiped(int position, int swipeDirection);
+		// void onSwiped(int position, int swipeDirection);
 		void onMove(int fromPosition, int toPosition);
 		void onSelectedChanged(RisajklerAdapter.FotkaHolder myViewHolder);
 		void onClearView(RisajklerAdapter.FotkaHolder myViewHolder);
 	}
+	public interface ItemTouch_DragSwipe {
+		void onSwiped(int position, int swipeDirection);
+		void onMove(int fromPosition, int toPosition);
+	}
 
-	private final ItemTouch_Interface listener;
+	private final ItemTouch_Interface rvAdapter;
+	private final ItemTouch_DragSwipe rvFrag;
 
-	public ItemMoveCallback(ItemTouch_Interface listener) {
-		this.listener = listener;
+	public ItemMoveCallback(ItemTouch_Interface rvAdapter, ItemTouch_DragSwipe rvFrag) {
+		this.rvAdapter = rvAdapter;
+		this.rvFrag = rvFrag;
 	}
 
 	@Override
@@ -32,11 +38,11 @@ public class ItemMoveCallback extends ItemTouchHelper.Callback {
 
 	@Override
 	public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-		int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-		int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+		// int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+		// int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
 
-		// int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END;
-		// int swipeFlags = 0;
+		int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END;
+		int swipeFlags = ItemTouchHelper.START;
 		return makeMovementFlags(dragFlags, swipeFlags);
 	}
 
@@ -44,14 +50,18 @@ public class ItemMoveCallback extends ItemTouchHelper.Callback {
 	public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 		// item deleted from adapter. system will call onClearView
 		int position = viewHolder.getAdapterPosition();
-		listener.onSwiped(position, i);
+		// rvAdapter.onSwiped(position, i);
+		rvFrag.onSwiped(position, i);
 	}
 
 
 	@Override
 	public boolean onMove(@NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
 		// drag and drop starting. after returning true, system will call onMoved
-		listener.onMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+		int fromPosition = viewHolder.getAdapterPosition();
+		int toPosition = target.getAdapterPosition();
+		rvFrag.onMove(fromPosition, toPosition);
+		// rvAdapter.onMove(fromPosition, toPosition);
 		return true;
 	}
 
@@ -68,7 +78,7 @@ public class ItemMoveCallback extends ItemTouchHelper.Callback {
 		if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
 			if (viewHolder instanceof RisajklerAdapter.FotkaHolder) {
 				RisajklerAdapter.FotkaHolder myViewHolder= (RisajklerAdapter.FotkaHolder) viewHolder;
-				listener.onSelectedChanged(myViewHolder);
+				rvAdapter.onSelectedChanged(myViewHolder);
 			}
 		}
 
@@ -79,7 +89,7 @@ public class ItemMoveCallback extends ItemTouchHelper.Callback {
 		// inteaction with element is done and animation is completed
 		if (viewHolder instanceof RisajklerAdapter.FotkaHolder) {
 			RisajklerAdapter.FotkaHolder myViewHolder= (RisajklerAdapter.FotkaHolder) viewHolder;
-			listener.onClearView(myViewHolder);
+			rvAdapter.onClearView(myViewHolder);
 		}
 	}
 
