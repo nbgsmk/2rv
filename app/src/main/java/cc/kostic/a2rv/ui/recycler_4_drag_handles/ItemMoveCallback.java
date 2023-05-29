@@ -30,7 +30,6 @@ public class ItemMoveCallback extends ItemTouchHelper.Callback {
 	}
 
 
-
 	@Override
 	public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
 		// int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
@@ -66,7 +65,6 @@ public class ItemMoveCallback extends ItemTouchHelper.Callback {
 				RisajklerAdapter.FotkaHolder myViewHolder= (RisajklerAdapter.FotkaHolder) viewHolder;
 				listener.onSelectedChanged(myViewHolder);
 			}
-
 		}
 
 	}

@@ -22,16 +22,10 @@ import cc.kostic.a2rv.ui.data.Fotka;
 
 
 public class DragHandlesFragment extends Fragment
-		implements
-		RisajklerAdapter.Klik_listener
-	,
-		DragHandlesListener
-
-{
+		implements RisajklerAdapter.Klik_listener, DragHandlesListener {
 
 	private Klot4DragHandlesBinding binding;
 	ItemTouchHelper touchHelper;
-
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		binding = Klot4DragHandlesBinding.inflate(inflater, container, false);
@@ -88,7 +82,7 @@ public class DragHandlesFragment extends Fragment
 	public boolean onLongClickItem(View view, Fotka fotka, int position) {
 			String msg = "fragment long click: pos-" + position + ", item-" + fotka.getNaziv();
 			Toast.makeText(view.getContext(), msg, Toast.LENGTH_SHORT).show();
-		return false;
+		return true;
 	}
 
 

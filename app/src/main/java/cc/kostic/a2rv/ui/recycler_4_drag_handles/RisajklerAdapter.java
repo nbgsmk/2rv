@@ -135,7 +135,11 @@ public class RisajklerAdapter extends RecyclerView.Adapter<RisajklerAdapter.Fotk
 			itemView.setOnLongClickListener(new View.OnLongClickListener() {
 				@Override
 				public boolean onLongClick(View view) {
-					return false;
+					if ( klik_listener != null){
+						int position = getAdapterPosition();
+						klik_listener.onLongClickItem(view, lista.get(position), position);
+					}
+					return true;
 				}
 			});
 

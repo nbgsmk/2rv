@@ -14,7 +14,7 @@ public class DragHandlesViewModel extends ViewModel {
 	private final MutableLiveData<String> mText = new MutableLiveData<>();
 
 	public DragHandlesViewModel() {
-		mText.setValue("Recycler ItemTouchHelper \n drag HANDLES");
+		mText.setValue("Recycler ItemTouchHelper \n drag with HANDLES");
 	}
 
 	public LiveData<String> getText() {
