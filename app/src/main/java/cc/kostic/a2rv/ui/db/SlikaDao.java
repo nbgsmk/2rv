@@ -21,6 +21,9 @@ public interface SlikaDao {
 	@Insert
 	void insertAll(Slika... slike);
 
+	@Insert
+	void insert(List<Slika> slike);
+
 	@Delete
 	void delete(Slika slika);
 
