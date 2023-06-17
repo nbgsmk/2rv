@@ -17,11 +17,15 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import cc.kostic.a2rv.data.Fotka;
 import cc.kostic.a2rv.databinding.Klot5DragHandlesBinding;
+import cc.kostic.a2rv.databinding.Klot6DragHandlesBinding;
 import cc.kostic.a2rv.db.Slika;
 
 
@@ -29,7 +33,7 @@ public class RoomFragment extends Fragment
 		implements RisajklerAdapter.Klik_listener, DragHandlesListener
 {
 
-	private Klot5DragHandlesBinding binding;
+	private Klot6DragHandlesBinding binding;
 	ItemTouchHelper touchHelper;
 
 	@Override
@@ -38,7 +42,7 @@ public class RoomFragment extends Fragment
 	}
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		binding = Klot5DragHandlesBinding.inflate(inflater, container, false);
+		binding = Klot6DragHandlesBinding.inflate(inflater, container, false);
 
 		RecyclerView rv = binding.rv;
 		RisajklerAdapter adapter = new RisajklerAdapter(new RisajklerAdapter.WordDiff());
@@ -50,7 +54,7 @@ public class RoomFragment extends Fragment
 
 		int koji = 1;
 		if (koji == 1) {
-			GridLayoutManager glm = new GridLayoutManager(requireContext(), 3);
+			GridLayoutManager glm = new GridLayoutManager(requireContext(), 1);
 			rv.setLayoutManager(glm);
 		} else if (koji == 2) {
 			StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
@@ -100,6 +104,20 @@ public class RoomFragment extends Fragment
 		// touchHelper = new ItemTouchHelper(callback);
 		// touchHelper.attachToRecyclerView(rv);
 
+		Random r = new Random();
+		binding.fab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				model.insert(new Slika("a " + r.nextInt(100), "b "));
+			}
+		});
+		binding.fab.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View view) {
+				model.deleteAll();
+				return true;
+			}
+		});
 		return binding.getRoot();
 	}
 

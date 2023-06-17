@@ -11,7 +11,7 @@ import java.util.List;
 
 @Dao
 public interface SlikaDao {
-	@Query("SELECT * FROM slika_tabela")
+	@Query("SELECT * FROM slika_tabela ORDER BY naziv")
 	LiveData<List<Slika>> getAll();
 
 	@Insert(onConflict = OnConflictStrategy.REPLACE)

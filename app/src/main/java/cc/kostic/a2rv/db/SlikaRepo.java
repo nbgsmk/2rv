@@ -23,6 +23,14 @@ public class SlikaRepo {
 	}
 
 	public void insert(Slika slika){
-
+		AppDb.databaseWriteExecutor.execute(() -> {
+			slikaDao.insert(slika);
+		});
 	}
+	public void deleteAll(){
+		AppDb.databaseWriteExecutor.execute(() -> {
+			slikaDao.deleteAll();
+		});
+	}
+
 }

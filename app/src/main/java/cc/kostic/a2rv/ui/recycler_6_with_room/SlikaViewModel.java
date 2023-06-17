@@ -37,4 +37,7 @@ public class SlikaViewModel extends AndroidViewModel {
 	void insert(Slika slika){
 		repo.insert(slika);
 	}
+	void deleteAll(){
+		repo.deleteAll();
+	}
 }
