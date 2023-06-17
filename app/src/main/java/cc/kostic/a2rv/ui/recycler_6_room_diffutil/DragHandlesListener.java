@@ -1,4 +1,4 @@
-package cc.kostic.a2rv.ui.recycler_6_with_room;
+package cc.kostic.a2rv.ui.recycler_6_room_diffutil;
 
 import androidx.recyclerview.widget.RecyclerView;
 

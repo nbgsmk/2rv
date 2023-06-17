@@ -1,4 +1,4 @@
-package cc.kostic.a2rv.ui.recycler_6_with_room;
+package cc.kostic.a2rv.ui.recycler_6_room_diffutil;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,19 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import cc.kostic.a2rv.data.Fotka;
-import cc.kostic.a2rv.databinding.Klot5DragHandlesBinding;
 import cc.kostic.a2rv.databinding.Klot6DragHandlesBinding;
 import cc.kostic.a2rv.db.Slika;
 
@@ -49,7 +45,7 @@ public class RoomFragment extends Fragment
 		adapter.setKlikListener(this);
 		// adapter.setDragListener(this);
 		// rv.setHasFixedSize(true);
-		// rv.setItemAnimator(new DefaultItemAnimator());
+		rv.setItemAnimator(new DefaultItemAnimator());
 		rv.setAdapter(adapter);
 
 		int koji = 1;

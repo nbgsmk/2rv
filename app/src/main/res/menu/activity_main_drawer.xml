@@ -11,26 +11,26 @@
 		<item
 			android:id="@+id/nav_1"
 			android:icon="@drawable/ic_menu_slideshow"
-			android:title="Klot" />
+			android:title="Klot 1" />
 		<item
 			android:id="@+id/nav_2"
 			android:icon="@drawable/ic_menu_gallery"
-			android:title="Klot + listener" />
+			android:title="Klot 2 + listener" />
 		<item
 			android:id="@+id/nav_3"
 			android:icon="@drawable/ic_menu_gallery"
-			android:title="Klot + drag, swipe" />
+			android:title="Klot 3 + drag, swipe" />
 		<item
 			android:id="@+id/nav_4"
 			android:icon="@drawable/ic_menu_gallery"
-			android:title="Klot + drag handles" />
+			android:title="Klot 4 + drag handles" />
 		<item
 			android:id="@+id/nav_5"
 			android:icon="@drawable/ic_menu_gallery"
-			android:title="Klot + DiffUtil" />
+			android:title="Klot 5 + DiffUtil" />
 		<item
 			android:id="@+id/nav_6"
 			android:icon="@drawable/ic_menu_gallery"
-			android:title="Room + DiffUtil" />
+			android:title="Room 6 + DiffUtil" />
 	</group>
 </menu>

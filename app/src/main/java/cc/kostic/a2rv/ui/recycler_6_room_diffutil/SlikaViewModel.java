@@ -1,4 +1,4 @@
-package cc.kostic.a2rv.ui.recycler_6_with_room;
+package cc.kostic.a2rv.ui.recycler_6_room_diffutil;
 
 import android.app.Application;
 
@@ -20,7 +20,7 @@ public class SlikaViewModel extends AndroidViewModel {
 
 	public SlikaViewModel(@NonNull Application application) {
 		super(application);
-		mText.setValue("Room with DiffUtil");
+		mText.setValue("Room with DiffUtil \n TODO TOUCH-DRAG HENDLERI");
 		repo = new SlikaRepo(application);
 		slike = repo.getSlike();
 	}
